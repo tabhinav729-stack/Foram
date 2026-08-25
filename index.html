@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -325,6 +326,7 @@ body {
     padding: 12px 25px;
 
     border: 1px solid #263247;
+
     border-radius: 0;
 
     background: transparent;
@@ -351,6 +353,7 @@ body {
 
 .roast-button:hover {
     background: #263247;
+
     color: #f7f2e7;
 
     transform: translateY(-2px);
@@ -532,7 +535,8 @@ body {
 
     bottom: 7%;
     left: 50%;
-       transform:
+
+    transform:
         translateX(-50%);
 
     font-family:
@@ -572,6 +576,7 @@ body {
 
 .foram-screen.visible {
     opacity: 1;
+
     visibility: visible;
 
     pointer-events: auto;
@@ -597,8 +602,8 @@ body {
 
 
 /*
-   Each panel overlaps slightly so there
-   are no white gaps between the slants.
+    Each panel overlaps slightly so there
+    are no white gaps between the slants.
 */
 
 .foram-panel {
@@ -741,8 +746,6 @@ body {
 
     letter-spacing: 0.12em;
 
-    text-transform: none;
-
     text-shadow:
         0 2px 7px rgba(0,0,0,0.5);
 }
@@ -801,6 +804,10 @@ body {
     transition:
         opacity 0.6s ease,
         visibility 0.6s ease;
+
+    /* IMPORTANT:
+       Full poems need to be scrollable */
+    overflow-y: auto;
 }
 
 .letter-screen.visible {
@@ -812,7 +819,11 @@ body {
 }
 
 .letter-screen-content {
-    width: min(700px,85vw);
+    width: min(760px,88vw);
+
+    min-height: 100%;
+
+    padding: 90px 0 70px;
 
     text-align: center;
 
@@ -821,6 +832,8 @@ body {
     flex-direction: column;
 
     align-items: center;
+
+    justify-content: center;
 }
 
 .letter-screen-letter {
@@ -830,7 +843,7 @@ body {
         serif;
 
     font-size:
-        clamp(100px,15vw,180px);
+        clamp(80px,12vw,150px);
 
     font-weight: 400;
 
@@ -858,13 +871,16 @@ body {
 }
 
 .letter-screen-roast {
-    max-width: 520px;
+    width: min(650px,85vw);
+
+    max-width: 650px;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
-    font-size: 24px;
+    font-size:
+        clamp(17px,2vw,21px);
 
     font-style: italic;
 
@@ -873,8 +889,17 @@ body {
     color: #4d5360;
 
     margin-bottom: 55px;
+
+    /*
+       THIS preserves all the poem's line breaks.
+    */
+    white-space: pre-line;
 }
 
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
 
 .back-to-foram {
     position: absolute;
@@ -902,23 +927,37 @@ body {
 
     cursor: pointer;
 
-    transition: background 0.3s ease, color 0.3s ease, transform 0.25s ease;
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.25s ease;
 }
 
 .back-to-foram:hover {
     background: #263247;
+
     color: #f7f2e7;
+
     transform: translateY(-2px);
 }
 
 .back-to-foram.m-position {
     left: 50%;
-    transform: translateX(-50%);
+
+    transform:
+        translateX(-50%);
 }
 
 .back-to-foram.m-position:hover {
-    transform: translateX(-50%) translateY(-2px);
+    transform:
+        translateX(-50%)
+        translateY(-2px);
 }
+
+
+/* =========================================================
+   NEXT BUTTON
+========================================================= */
 
 .next-letter-button {
     padding: 12px 28px;
@@ -984,6 +1023,7 @@ body {
 
     .foram-word {
         font-size: 11px;
+
         letter-spacing: 0.05em;
     }
 
@@ -991,17 +1031,64 @@ body {
         font-size: 70px;
     }
 
-    .letter-screen-roast {
-        font-size: 20px;
-        padding: 0 10px;
+    .letter-screen-content {
+        width: 90vw;
+
+        padding:
+            80px 0
+            60px;
+    }
+
+    .letter-screen-letter {
+        font-size: 90px;
     }
 
     .letter-screen-word {
         font-size: 15px;
+
+        margin-bottom: 30px;
     }
+
+    .letter-screen-roast {
+        width: 88vw;
+
+        font-size: 18px;
+
+        line-height: 1.45;
+
+        margin-bottom: 40px;
+    }
+
+    .back-to-foram {
+        top: 15px;
+        left: 15px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .letter-screen-letter {
+        font-size: 75px;
+    }
+
+    .letter-screen-roast {
+        font-size: 17px;
+    }
+
+    .next-letter-button {
+        padding: 11px 20px;
+    }
+
 }
 
 </style>
+
 </head>
 
 
@@ -1164,7 +1251,7 @@ body {
             <img
                 class="foram-photo"
                 src="O.jpeg"
-                alt="Opeh - Hearted"
+                alt="Open-hearted"
             >
 
             <div class="foram-photo-overlay"></div>
@@ -1176,7 +1263,7 @@ body {
                 </div>
 
                 <div class="foram-word">
-                    Opeh - Hearted
+                    Open-hearted
                 </div>
 
             </div>
@@ -1196,7 +1283,7 @@ body {
             <img
                 class="foram-photo"
                 src="R.jpeg"
-                alt="Reckless"
+                alt="Relentless"
             >
 
             <div class="foram-photo-overlay"></div>
@@ -1208,7 +1295,7 @@ body {
                 </div>
 
                 <div class="foram-word">
-                    Reckless
+                    Relentless
                 </div>
 
             </div>
@@ -1283,14 +1370,17 @@ body {
     </div>
 
 </section>
+
+
 <!-- =========================================================
-     INDIVIDUAL LETTER / ROAST SCREEN
+     INDIVIDUAL LETTER / POEM SCREEN
 ========================================================= -->
 
 <section
     class="letter-screen"
     id="letterScreen"
 >
+
 
     <button
         class="back-to-foram"
@@ -1302,6 +1392,7 @@ body {
 
 
     <div class="letter-screen-content">
+
 
         <div
             class="letter-screen-letter"
@@ -1337,6 +1428,7 @@ body {
             Next: O
         </button>
 
+
     </div>
 
 </section>
@@ -1344,11 +1436,13 @@ body {
 
 <script>
 
+
 /* =========================================================
    ENVELOPE
 ========================================================= */
 
 let opened = false;
+
 
 function openEnvelope() {
 
@@ -1397,33 +1491,75 @@ function showForam(event) {
 }
 
 
-function backToForam() {
-
-    const letterScreen =
-        document.getElementById("letterScreen");
-
-    letterScreen.classList.remove("visible");
-
-    currentLetter = null;
-
-    document
-        .getElementById("foramScreen")
-        .classList.add("visible");
-}
-
-
 /* =========================================================
    LETTER DATA
 ========================================================= */
 
 const letterData = {
 
+
     F: {
 
         word: "Funny",
 
-        roast:
-            "Thinks she's hilarious. Unfortunately, she's right.",
+        roast: `Aaiye, suniye ek kahani meri dost ‘Foram’ ki.
+
+It began, as most unfortunate stories do,
+with laughter.
+
+Foram has a peculiar talent—
+she can find comedy
+where there was none to begin with.
+
+A quiet moment becomes a joke.
+A mistake becomes a memory.
+And if the mistake happens to be mine—
+
+it becomes history.
+
+She doesn't need a stage,
+a script,
+or even a particularly good joke.
+
+Give her a conversation
+and give her me,
+
+and apparently
+that's enough entertainment for the evening.
+
+She has mastered the art
+of making fun of me
+with such effortless innocence
+that being offended feels almost unreasonable.
+
+Almost.
+
+Because just when I think
+I've finally won an argument,
+
+she laughs.
+
+Not at the joke.
+
+At me.
+
+And somehow,
+that is funnier.
+
+Perhaps that is her real gift—
+
+not making people laugh,
+
+but making ordinary moments
+worth remembering.
+
+Though I must admit,
+
+I would appreciate this gift
+a little more
+
+if I weren't so frequently
+the punchline.`,
 
         next: "Next: O"
 
@@ -1432,10 +1568,70 @@ const letterData = {
 
     O: {
 
-        word: "Opeh - Hearted",
+        word: "Open-hearted",
 
-        roast:
-            "Can find seventeen possible meanings in a two-word message.",
+        roast: `But every good story has a quieter chapter.
+
+Behind the laughter
+is a heart that never quite learned
+how to keep its doors closed.
+
+Foram feels deeply.
+
+Perhaps too deeply.
+
+She gives without keeping score,
+cares without announcing it,
+and remembers the smallest things
+as though they were never small at all.
+
+She lets people in
+with a trust that is almost reckless—
+
+which is ironic,
+
+considering how much she likes
+to pretend she has everything under control.
+
+Her heart has no complicated entrance policy.
+
+No forms.
+No interviews.
+No background checks.
+
+Just—
+
+come in.
+
+And perhaps that is why
+the little things matter so much to her.
+
+A word.
+A gesture.
+A moment.
+
+Things that most people let disappear
+somehow find a place to stay with her.
+
+Of course,
+
+an open heart comes with its own inconveniences.
+
+It feels more.
+It remembers more.
+It gets hurt more.
+
+And yet,
+
+Foram never quite seems
+to learn the art of caring less.
+
+Which brings us
+to the next chapter—
+
+because when she cares,
+
+she does not do it halfway.`,
 
         next: "Next: R"
 
@@ -1444,10 +1640,86 @@ const letterData = {
 
     R: {
 
-        word: "Reckless",
+        word: "Relentless",
 
-        roast:
-            "Common sense is merely a suggestion.",
+        roast: `And then there is the part of the story
+where “enough” stops being a word.
+
+Foram does not let things go.
+
+She lets them marinate.
+
+A question enters her mind
+and suddenly it has a permanent address.
+
+A thought becomes a thread.
+
+A thread becomes a knot.
+
+And before you know it,
+
+she is pulling at that knot
+until the entire sweater
+has surrendered.
+
+You can tell her,
+
+“Leave it.”
+
+She won't.
+
+“Forget it.”
+
+She'll ask why.
+
+“It's fine.”
+
+She'll know
+you don't mean it.
+
+Because once something matters to her,
+
+she follows it.
+
+Through the doubt.
+Through the argument.
+Through the unnecessary sequel
+to the argument.
+
+She will chase an answer
+long after everyone else
+has decided the question is dead.
+
+And sometimes,
+
+honestly,
+
+it is exhausting.
+
+But there is something almost frightening
+about a person who refuses
+to give up easily.
+
+Foram may bend.
+
+She may pause.
+
+She may complain
+about having to continue.
+
+But somehow,
+
+she continues.
+
+And perhaps that is the dangerous thing
+about her—
+
+once she decides something matters,
+
+the world can suggest otherwise,
+
+but it will have a very difficult time
+convincing her.`,
 
         next: "Next: A"
 
@@ -1458,8 +1730,75 @@ const letterData = {
 
         word: "Adorable",
 
-        roast:
-            "Comes free with every opinion. No returns accepted.",
+        roast: `And just when the story becomes too difficult to defend her…
+
+there she is.
+
+Adorable.
+
+Not intentionally.
+
+That would be far too convenient.
+
+It happens in the smallest moments—
+
+the little excitement she cannot hide,
+the reactions she doesn't rehearse,
+the ridiculous things she says
+with complete seriousness.
+
+She can spend half an hour
+being impossible,
+
+and then do something so unexpectedly sweet
+that the entire prosecution
+falls apart.
+
+You remember the argument.
+You remember the annoyance.
+You remember thinking,
+
+“I am absolutely done with this woman.”
+
+And then she smiles.
+
+And suddenly,
+
+the case is dismissed.
+
+No evidence required.
+No explanation accepted.
+
+Apparently,
+
+this is how she gets away with everything.
+
+She has somehow managed
+to make being a menace
+look almost endearing.
+
+Which is deeply unfair.
+
+Because the truth is,
+
+there is something wonderfully unguarded
+about her softness.
+
+It appears when she forgets
+that anyone is watching.
+
+And those are probably
+the moments that stay.
+
+Not because they are extraordinary,
+
+but because they are hers.
+
+And by now,
+
+you begin to suspect
+that this story was never going to end
+with a completely sensible person.`,
 
         next: "Next: M"
 
@@ -1470,8 +1809,93 @@ const letterData = {
 
         word: "Menace",
 
-        roast:
-            "Looks harmless. That is the first mistake.",
+        roast: `And so, naturally, we arrive at M.
+
+Menace.
+
+Because what else could possibly happen
+when you combine—
+
+a comedian
+with no respect for your dignity,
+
+an open heart
+with no proper security system,
+
+a mind that refuses
+to leave a question alone,
+
+and a face
+that somehow gets away with all of it?
+
+You get Foram.
+
+She is the kind of trouble
+that doesn't announce itself.
+
+It arrives smiling.
+
+It makes you laugh.
+
+It learns exactly which buttons to press.
+
+Then presses them again—
+
+just to make sure they still work.
+
+She will bully you
+and call it friendship.
+
+She will argue with you
+and call it a conversation.
+
+She will overthink you
+and call it analysis.
+
+She will annoy you
+and somehow leave you
+laughing about it later.
+
+And perhaps that is the greatest trick
+this particular menace has pulled.
+
+She doesn't merely enter a room.
+
+She leaves behind stories.
+
+Inside jokes.
+
+Arguments that nobody remembers
+how they started.
+
+Little moments that seemed meaningless
+until they became memories.
+
+And somewhere along the way,
+
+without permission,
+without announcement,
+without even realising it,
+
+Foram became Foram.
+
+Funny enough to be remembered.
+Open-hearted enough to be felt.
+Relentless enough to be impossible to stop.
+Adorable enough to be forgiven.
+And menacing enough
+to make sure none of us ever get bored.
+
+So yes—
+
+F. O. R. A. M.
+
+Five letters.
+One person.
+
+And, apparently,
+
+a lifetime supply of trouble.`
 
     }
 
@@ -1484,6 +1908,7 @@ const letterData = {
 
 let currentLetter = null;
 
+
 function openLetter(letter) {
 
     currentLetter = letter;
@@ -1494,20 +1919,24 @@ function openLetter(letter) {
             "letterScreen"
         );
 
+
     const letterElement =
         document.getElementById(
             "letterScreenLetter"
         );
+
 
     const wordElement =
         document.getElementById(
             "letterScreenWord"
         );
 
+
     const roastElement =
         document.getElementById(
             "roastText"
         );
+
 
     const button =
         document.getElementById(
@@ -1527,14 +1956,36 @@ function openLetter(letter) {
     letterElement.textContent =
         letter;
 
+
     wordElement.textContent =
         data.word;
+
 
     roastElement.textContent =
         data.roast;
 
-    button.textContent =
-        data.next;
+
+    if (data.next) {
+
+        button.textContent =
+            data.next;
+
+        button.style.display =
+            "inline-block";
+
+    } else {
+
+        /*
+           M is the final letter.
+           Hide the Next button because
+           there is nowhere else to go.
+        */
+
+        button.style.display =
+            "none";
+
+    }
+
 
     document
         .getElementById("backToForamButton")
@@ -1545,6 +1996,47 @@ function openLetter(letter) {
 
 
     screen.classList.add(
+        "visible"
+    );
+
+
+    /*
+       Always start the poem at the top
+       when opening a new letter.
+    */
+
+    screen.scrollTop = 0;
+
+}
+
+
+/* =========================================================
+   BACK TO FORAM
+========================================================= */
+
+function backToForam() {
+
+    const letterScreen =
+        document.getElementById(
+            "letterScreen"
+        );
+
+
+    const foramScreen =
+        document.getElementById(
+            "foramScreen"
+        );
+
+
+    letterScreen.classList.remove(
+        "visible"
+    );
+
+
+    currentLetter = null;
+
+
+    foramScreen.classList.add(
         "visible"
     );
 
@@ -1593,8 +2085,10 @@ function nextLetter() {
 
 }
 
+
 </script>
 
 
 </body>
+
 </html>
