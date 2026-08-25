@@ -444,7 +444,7 @@
         transition:
             transform 1s cubic-bezier(.2,.8,.2,1);
 
-        pointer-events: none;
+        pointer-events: auto;
     }
 
     .letter-content {
@@ -757,7 +757,7 @@
                         Some things deserve a proper introduction.
                     </div>
                     
-<button class="roast-button" onclick="showForam()">
+<button class="roast-button" onclick="showForam(event)">
     I am ready to be roasted
 </button>
     
@@ -884,7 +884,10 @@
 
     function showForam() {
 
-    const envelope = document.getElementById("envelope");
+         // Stop the click from reaching the envelope
+    event.stopPropagation();
+
+    const stage = document.querySelector(".stage");
     const foramScreen = document.getElementById("foramScreen");
 
     // Fade out the envelope screen
