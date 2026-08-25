@@ -39,49 +39,102 @@
 
 /* Screen becomes visible */
 
-.foram-screen.visible {
+```css
+/* =========================================
+   FORAM FULL-SCREEN REVEAL
+========================================= */
 
+.foram-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease;
+}
+
+.foram-screen.visible {
     opacity: 1;
     visibility: visible;
-
-    transform: scale(1);
 }
 
 
 /* =========================================
-   SVG
+   FULL-WIDTH FORAM
 ========================================= */
 
 .foram-svg {
-
-    width: min(88vw, 900px);
+    width: 94vw;
     height: auto;
+
+    max-width: 1500px;
 
     overflow: visible;
 }
 
 
 /* =========================================
-   HAND-DRAWN LINES
+   PANEL LINES
 ========================================= */
 
 .panel-line {
-
     fill: none;
 
     stroke: #080808;
-
-    stroke-width: 4;
+    stroke-width: 3.5;
 
     stroke-linecap: round;
     stroke-linejoin: round;
 
-    /*
-       Makes the lines feel slightly
-       hand-drawn rather than perfectly digital.
-    */
-
     vector-effect: non-scaling-stroke;
+
+    transition:
+        stroke 0.3s ease,
+        stroke-width 0.3s ease;
+}
+
+
+/* =========================================
+   PANEL HOVER AREAS
+========================================= */
+
+.foram-panel {
+    fill: transparent;
+
+    cursor: pointer;
+
+    transition:
+        fill 0.3s ease;
+}
+
+
+/*
+   Individual panel highlight
+*/
+
+.foram-panel:hover {
+    fill: rgba(169, 118, 47, 0.10);
+}
+
+
+/*
+   Make the outline slightly stronger
+   when the panel is hovered.
+*/
+
+.foram-panel:hover + .panel-outline {
+    stroke: #a9762f;
+    stroke-width: 5;
 }
 
 
@@ -90,19 +143,19 @@
 ========================================= */
 
 .foram-letter {
-
     font-family:
         Georgia,
         "Times New Roman",
         serif;
 
-    font-size: 68px;
-
+    font-size: 82px;
     font-weight: 400;
 
     fill: #050505;
 
     text-anchor: middle;
+
+    pointer-events: none;
 
     opacity: 0;
 
@@ -113,42 +166,54 @@
 
     transition:
         opacity 0.45s ease,
-        transform 0.45s ease;
+        transform 0.3s ease,
+        fill 0.3s ease;
 }
 
 
 /* =========================================
-   LETTER ANIMATION
+   LETTER APPEARANCE
 ========================================= */
 
 .foram-screen.visible .foram-letter {
-
     opacity: 1;
-
     transform: translateY(0);
 }
 
 
-/* Each letter appears separately */
+/* staggered entrance */
 
-.foram-screen.visible .foram-letter:nth-of-type(6) {
+.foram-screen.visible .letter-1 {
+    transition-delay: 0.15s;
+}
+
+.foram-screen.visible .letter-2 {
     transition-delay: 0.25s;
 }
 
-.foram-screen.visible .foram-letter:nth-of-type(7) {
-    transition-delay: 0.4s;
+.foram-screen.visible .letter-3 {
+    transition-delay: 0.35s;
 }
 
-.foram-screen.visible .foram-letter:nth-of-type(8) {
+.foram-screen.visible .letter-4 {
+    transition-delay: 0.45s;
+}
+
+.foram-screen.visible .letter-5 {
     transition-delay: 0.55s;
 }
 
-.foram-screen.visible .foram-letter:nth-of-type(9) {
-    transition-delay: 0.7s;
-}
 
-.foram-screen.visible .foram-letter:nth-of-type(10) {
-    transition-delay: 0.85s;
+/* =========================================
+   HOVER LETTER EFFECT
+========================================= */
+
+.panel-group:hover .foram-letter {
+    fill: #a9762f;
+
+    transform:
+        translateY(-4px)
+        scale(1.06);
 }
 
 
@@ -159,14 +224,19 @@
 @media (max-width: 600px) {
 
     .foram-svg {
-        width: 94vw;
+        width: 97vw;
     }
 
     .foram-letter {
-        font-size: 72px;
+        font-size: 75px;
     }
 
+    .panel-line {
+        stroke-width: 3;
+    }
 }
+```
+
     
     .roast-button {
     display: inline-block;
