@@ -1,291 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>For Foram</title>
 
-
 <style>
 
-/* =========================================
-   GENERAL
-========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Courier+Prime:wght@400;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Courier+Prime:wght@400&display=swap');
+
+/* =====================================================
+   GLOBAL
+===================================================== */
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html,
 body {
-    margin: 0;
-    padding: 0;
-
     width: 100%;
     height: 100%;
 }
 
 body {
-    background: #f7f2e7;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(255,255,255,0.75),
+            transparent 45%
+        ),
+        #e8e1d2;
 
     color: #263247;
-
-    overflow: hidden;
 }
 
 
-/* =========================================
-   ENVELOPE SCREEN
-========================================= */
+/* =====================================================
+   OPENING SCREEN
+===================================================== */
 
 .stage {
-
     position: fixed;
-
     inset: 0;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
-    background: #f7f2e7;
-}
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(255,255,255,0.7),
+            transparent 45%
+        ),
+        #e8e1d2;
 
-
-.envelope-wrapper {
-
-    position: relative;
-
-    width: min(760px, 85vw);
-
-    height: min(480px, 60vh);
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    cursor: pointer;
-}
-
-
-.envelope {
-
-    position: relative;
-
-    width: 500px;
-
-    height: 320px;
-
-    background: #eee4d0;
-
-    border: 1px solid #263247;
-
-    box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.08);
-
-    overflow: hidden;
-}
-
-
-/* Back */
-
-.envelope-back {
-
-    position: absolute;
-
-    inset: 0;
-
-    background: #eee4d0;
-
-    z-index: 1;
-}
-
-
-/* Letter */
-
-.envelope-letter {
-
-    position: absolute;
-
-    left: 50%;
-
-    bottom: 20px;
-
-    width: 88%;
-
-    height: 76%;
-
-    transform:
-        translateX(-50%)
-        translateY(110%);
-
-    background: #fffdf7;
-
-    border: 1px solid #263247;
-
-    z-index: 2;
+    z-index: 10;
 
     transition:
-        transform 1s ease;
+        opacity 0.8s ease,
+        visibility 0.8s ease;
 }
 
 
-/* Front flap */
+/* small top text */
 
-.envelope-front {
-
+.background-text {
     position: absolute;
 
-    inset: 0;
+    top: 7%;
+    width: 100%;
 
-    background: #eee4d0;
+    text-align: center;
 
-    clip-path:
-        polygon(
-            0 0,
-            100% 0,
-            50% 58%
-        );
+    font-family: "Courier Prime", monospace;
+    font-size: 10px;
 
-    border-bottom: 1px solid #263247;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
 
-    z-index: 3;
+    color: #7d7566;
 
-    transition:
-        transform 1s ease;
+    opacity: 0.75;
 }
 
 
-/* Open envelope */
+/* =====================================================
+   FULL PAGE LETTER
+===================================================== */
 
-.envelope-wrapper.open .envelope-letter {
-
-    transform:
-        translateX(-50%)
-        translateY(0);
-}
-
-.envelope-wrapper.open .envelope-front {
-
-    transform:
-        rotateX(180deg);
-
-    transform-origin: top;
-}
-
-
-/* =========================================
-   LETTER CONTENT
-========================================= */
-
-.letter-content {
-
-    height: 100%;
+.letter-opening {
+    width: 100vw;
+    height: 100vh;
 
     display: flex;
-
-    flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
 
-    padding: 30px;
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(255,255,255,0.7),
+            transparent 45%
+        ),
+        #f7f2e7;
 }
 
 
+.letter-opening-content {
+    width: min(900px, 90vw);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* =====================================================
+   OPENING TEXT
+===================================================== */
+
 .letter-small {
+    font-family: "Courier Prime", monospace;
 
-    font-family:
-        "Courier Prime",
-        monospace;
-
-    font-size: 10px;
+    font-size: 11px;
 
     letter-spacing: 0.35em;
 
     text-transform: uppercase;
 
-    color: #9b927f;
+    color: #8b816f;
 
-    margin-bottom: 32px;
+    margin-bottom: 28px;
 }
 
 
 .letter-title {
+    font-family: "Caveat", cursive;
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
+    font-size: clamp(
+        65px,
+        8vw,
+        105px
+    );
 
-    font-size:
-        clamp(60px, 8vw, 100px);
-
-    font-style: italic;
+    font-weight: 500;
 
     color: #263247;
 
-    margin:
-        0 0 25px;
+    line-height: 1;
+
+    margin-bottom: 20px;
 }
 
 
-.letter-divider {
-
+.letter-line {
     width: 62px;
-
     height: 1px;
 
     background: #a9762f;
 
-    margin-bottom: 24px;
+    margin: 0 auto 28px;
 }
 
 
 .letter-text {
+    font-family: "Cormorant Garamond", serif;
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 22px;
+    font-size: clamp(
+        22px,
+        2.5vw,
+        30px
+    );
 
     font-style: italic;
 
-    color: #59606c;
+    color: #4d5360;
 
-    margin: 0;
+    margin-bottom: 0;
 }
 
 
-/* =========================================
-   INTRO BUTTON
-========================================= */
+/* =====================================================
+   ROAST BUTTON
+===================================================== */
 
 .roast-button {
+    margin-top: 55px;
 
-    display: inline-block;
+    padding: 14px 30px;
 
-    margin-top: 45px;
-
-    padding:
-        11px 24px;
-
-    border:
-        1px solid #263247;
+    border: 1px solid #263247;
 
     border-radius: 0;
 
@@ -293,21 +207,15 @@ body {
 
     color: #263247;
 
-    font-family:
-        "Courier Prime",
-        monospace;
+    font-family: "Courier Prime", monospace;
 
-    font-size: 11px;
+    font-size: 12px;
 
-    font-weight: 400;
-
-    letter-spacing: 0.16em;
+    letter-spacing: 0.14em;
 
     text-transform: uppercase;
 
     cursor: pointer;
-
-    appearance: none;
 
     transition:
         background 0.3s ease,
@@ -318,42 +226,221 @@ body {
 
 
 .roast-button:hover {
-
     background: #263247;
 
     color: #f7f2e7;
 
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 
     letter-spacing: 0.18em;
 }
 
 
-.roast-button:active {
-
-    transform:
-        translateY(0);
-}
-
-
-/* =========================================
-   FORAM SCREEN
-========================================= */
+/* =====================================================
+   FORAM PANEL SCREEN
+===================================================== */
 
 .foram-screen {
-
     position: fixed;
 
     inset: 0;
 
-    z-index: 100;
+    z-index: 20;
 
     background: #f7f2e7;
 
     display: flex;
 
     align-items: center;
+
+    justify-content: center;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease;
+}
+
+
+.foram-screen.visible {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+/* =====================================================
+   FORAM SVG
+===================================================== */
+
+.foram-svg {
+    width: 100vw;
+
+    height: 100vh;
+
+    overflow: visible;
+}
+
+
+/* =====================================================
+   PHOTO PANELS
+===================================================== */
+
+.photo-panel {
+    cursor: pointer;
+
+    transition:
+        opacity 0.35s ease,
+        filter 0.35s ease;
+}
+
+
+/* dark overlay */
+
+.photo-overlay {
+    fill: rgba(0,0,0,0.12);
+
+    pointer-events: none;
+
+    transition:
+        fill 0.35s ease;
+}
+
+
+/* hover effect */
+
+.panel-group:hover .photo-overlay {
+    fill: rgba(169,118,47,0.18);
+}
+
+
+.panel-group:hover .photo-panel {
+    filter:
+        brightness(1.08)
+        saturate(1.08);
+}
+
+
+/* =====================================================
+   PANEL OUTLINES
+===================================================== */
+
+.panel-outline {
+    fill: none;
+
+    stroke: #111;
+
+    stroke-width: 3;
+
+    stroke-linejoin: round;
+
+    vector-effect: non-scaling-stroke;
+
+    transition:
+        stroke 0.3s ease,
+        stroke-width 0.3s ease;
+}
+
+
+.panel-group:hover .panel-outline {
+    stroke: #a9762f;
+
+    stroke-width: 5;
+}
+
+
+/* =====================================================
+   FORAM LETTERS
+===================================================== */
+
+.foram-letter {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 92px;
+
+    font-weight: 400;
+
+    fill: white;
+
+    stroke: rgba(0,0,0,0.15);
+
+    stroke-width: 1;
+
+    paint-order: stroke fill;
+
+    text-anchor: middle;
+
+    pointer-events: none;
+
+    transition:
+        transform 0.35s ease,
+        fill 0.35s ease;
+}
+
+
+.panel-group:hover .foram-letter {
+    fill: #ffffff;
+
+    transform:
+        translateY(-5px)
+        scale(1.08);
+}
+
+
+/* =====================================================
+   WORDS
+===================================================== */
+
+.foram-word {
+    font-family:
+        "Courier Prime",
+        monospace;
+
+    font-size: 23px;
+
+    letter-spacing: 0.08em;
+
+    fill: white;
+
+    text-anchor: middle;
+
+    pointer-events: none;
+
+    paint-order: stroke fill;
+
+    stroke: rgba(0,0,0,0.25);
+
+    stroke-width: 0.8;
+}
+
+
+/* =====================================================
+   INDIVIDUAL LETTER SCREEN
+===================================================== */
+
+.letter-screen {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 30;
+
+    background: #f7f2e7;
+
+    display: flex;
+
+    align-items: center;
+
     justify-content: center;
 
     opacity: 0;
@@ -368,258 +455,7 @@ body {
 }
 
 
-.foram-screen.visible {
-
-    opacity: 1;
-
-    visibility: visible;
-
-    pointer-events: auto;
-}
-
-
-.foram-svg {
-
-    width: 100vw;
-
-    height: 100vh;
-
-    display: block;
-}
-
-
-/* =========================================
-   PHOTO PANELS
-========================================= */
-
-.panel-photo {
-
-    pointer-events: none;
-
-    opacity: 0.88;
-
-    transition:
-        opacity 0.35s ease,
-        transform 0.4s ease;
-}
-
-
-.photo-overlay {
-
-    fill:
-        rgba(247, 242, 231, 0.18);
-
-    pointer-events: none;
-
-    transition:
-        fill 0.3s ease;
-}
-
-
-/* =========================================
-   PANEL BORDER
-========================================= */
-
-.foram-panel {
-
-    fill: transparent;
-
-    stroke: #050505;
-
-    stroke-width: 3;
-
-    transition:
-        fill 0.3s ease;
-}
-
-
-/* =========================================
-   PANEL HOVER
-========================================= */
-
-.panel-group {
-
-    cursor: pointer;
-}
-
-
-.panel-group:hover .panel-photo {
-
-    opacity: 1;
-}
-
-
-.panel-group:hover .photo-overlay {
-
-    fill:
-        rgba(169, 118, 47, 0.18);
-}
-
-
-.panel-group:hover .foram-panel {
-
-    fill:
-        rgba(169, 118, 47, 0.05);
-}
-
-
-/* =========================================
-   FORAM LETTERS
-========================================= */
-
-.foram-letter {
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size: 82px;
-
-    font-weight: 400;
-
-    fill: #050505;
-
-    text-anchor: middle;
-
-    pointer-events: none;
-
-    opacity: 0;
-
-    transform-box: fill-box;
-
-    transform-origin: center;
-
-    transform:
-        translateY(12px);
-
-    transition:
-        opacity 0.45s ease,
-        transform 0.3s ease,
-        fill 0.3s ease;
-}
-
-
-.foram-screen.visible .foram-letter {
-
-    opacity: 1;
-
-    transform:
-        translateY(0);
-}
-
-
-.panel-group:hover .foram-letter {
-
-    fill: #263247;
-}
-
-
-/* =========================================
-   FORAM WORDS
-========================================= */
-
-.foram-word {
-
-    font-family:
-        "Courier Prime",
-        monospace;
-
-    font-size: 22px;
-
-    letter-spacing: 0.08em;
-
-    fill: #050505;
-
-    text-anchor: middle;
-
-    pointer-events: none;
-
-    opacity: 0;
-
-    transition:
-        opacity 0.45s ease,
-        fill 0.3s ease;
-}
-
-
-.panel-group:hover .foram-word {
-
-    fill: #263247;
-}
-
-
-/* Stagger the words */
-
-.foram-screen.visible .word-1 {
-
-    opacity: 1;
-
-    transition-delay: 0.35s;
-}
-
-.foram-screen.visible .word-2 {
-
-    opacity: 1;
-
-    transition-delay: 0.50s;
-}
-
-.foram-screen.visible .word-3 {
-
-    opacity: 1;
-
-    transition-delay: 0.65s;
-}
-
-.foram-screen.visible .word-4 {
-
-    opacity: 1;
-
-    transition-delay: 0.80s;
-}
-
-.foram-screen.visible .word-5 {
-
-    opacity: 1;
-
-    transition-delay: 0.95s;
-}
-
-
-/* =========================================
-   INDIVIDUAL LETTER SCREEN
-========================================= */
-
-.letter-screen {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 200;
-
-    background: #f7f2e7;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-        opacity 0.6s ease,
-        visibility 0.6s ease;
-}
-
-
 .letter-screen.visible {
-
     opacity: 1;
 
     visibility: visible;
@@ -629,9 +465,7 @@ body {
 
 
 .letter-screen-content {
-
-    width:
-        min(700px, 85vw);
+    width: min(750px, 88vw);
 
     text-align: center;
 
@@ -643,87 +477,80 @@ body {
 }
 
 
-/* Big letter */
+/* BIG LETTER */
 
 .letter-screen-letter {
-
     font-family:
         Georgia,
         "Times New Roman",
         serif;
 
-    font-size:
-        clamp(100px, 15vw, 180px);
+    font-size: clamp(
+        140px,
+        20vw,
+        230px
+    );
 
     font-weight: 400;
 
+    line-height: 0.8;
+
     color: #263247;
 
-    line-height: 0.9;
-
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 
-/* Word */
+/* WORD */
 
 .letter-screen-word {
-
     font-family:
         "Courier Prime",
         monospace;
 
-    font-size: 18px;
+    font-size: 20px;
 
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
 
     text-transform: uppercase;
 
     color: #a9762f;
 
-    margin-bottom: 45px;
+    margin-bottom: 50px;
 }
 
 
-/* Roast */
+/* ROAST */
 
 .letter-screen-roast {
-
-    max-width: 520px;
+    max-width: 600px;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
-    font-size: 24px;
+    font-size: clamp(
+        25px,
+        3vw,
+        34px
+    );
 
     font-style: italic;
 
-    line-height: 1.5;
+    line-height: 1.45;
 
     color: #4d5360;
 
-    margin-bottom: 55px;
+    margin-bottom: 60px;
 }
 
 
-.letter-screen-roast p {
-
-    margin: 0;
-}
-
-
-/* =========================================
-   NEXT BUTTON
-========================================= */
+/* NEXT BUTTON */
 
 .next-letter-button {
+    padding: 14px 32px;
 
-    padding:
-        12px 28px;
-
-    border:
-        1px solid #263247;
+    border: 1px solid #263247;
 
     border-radius: 0;
 
@@ -735,17 +562,13 @@ body {
         "Courier Prime",
         monospace;
 
-    font-size: 11px;
-
-    font-weight: 400;
+    font-size: 12px;
 
     letter-spacing: 0.16em;
 
     text-transform: uppercase;
 
     cursor: pointer;
-
-    appearance: none;
 
     transition:
         background 0.3s ease,
@@ -755,125 +578,101 @@ body {
 
 
 .next-letter-button:hover {
-
     background: #263247;
 
     color: #f7f2e7;
 
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 }
 
 
-.next-letter-button:active {
-
-    transform:
-        translateY(0);
-}
-
-
-/* =========================================
+/* =====================================================
    MOBILE
-========================================= */
+===================================================== */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
-    .letter-screen-roast {
-
-        font-size: 20px;
-
-        padding:
-            0 10px;
+    .letter-small {
+        font-size: 9px;
     }
 
+    .letter-text {
+        padding: 0 20px;
+    }
+
+    .foram-letter {
+        font-size: 75px;
+    }
+
+    .foram-word {
+        font-size: 17px;
+    }
+
+    .letter-screen-roast {
+        font-size: 23px;
+
+        padding: 0 15px;
+    }
 
     .letter-screen-word {
-
         font-size: 15px;
     }
 
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- ==================================================
-     1. ENVELOPE
-================================================== -->
+<!-- =====================================================
+     OPENING PAGE
+===================================================== -->
 
-<main class="stage">
+<section class="stage" id="openingScreen">
 
-    <div
-        class="envelope-wrapper"
-        id="envelopeWrapper"
-        onclick="openEnvelope()"
-    >
+    <div class="background-text">
+        Opened at your own risk
+    </div>
 
-        <div class="envelope">
+    <div class="letter-opening">
 
+        <div class="letter-opening-content">
 
-            <div class="envelope-back"></div>
-
-
-            <!-- Letter inside envelope -->
-
-            <div class="envelope-letter">
-
-                <div class="letter-content">
-
-
-                    <div class="letter-small">
-                        Opened at your own risk
-                    </div>
-
-
-                    <h1 class="letter-title">
-                        For Foram
-                    </h1>
-
-
-                    <div class="letter-divider"></div>
-
-
-                    <p class="letter-text">
-                        Some things deserve a proper introduction.
-                    </p>
-
-
-                    <button
-                        class="roast-button"
-                        onclick="showForam(event)"
-                    >
-                        I am ready to be roasted
-                    </button>
-
-
-                </div>
-
+            <div class="letter-small">
+                Opened at your own risk
             </div>
 
+            <div class="letter-title">
+                For Foram
+            </div>
 
-            <!-- Envelope flap -->
+            <div class="letter-line"></div>
 
-            <div class="envelope-front"></div>
+            <div class="letter-text">
+                Some things deserve a proper introduction.
+            </div>
 
+            <button
+                class="roast-button"
+                onclick="showForam()"
+            >
+                I am ready to be roasted
+            </button>
 
         </div>
 
     </div>
 
-</main>
+</section>
 
 
 
-<!-- ==================================================
-     2. FORAM PHOTO PANELS
-================================================== -->
+<!-- =====================================================
+     FORAM PANEL PAGE
+===================================================== -->
 
 <section
     class="foram-screen"
@@ -883,417 +682,285 @@ body {
 
 <svg
     class="foram-svg"
-    viewBox="0 0 1500 500"
-    preserveAspectRatio="none"
+    viewBox="0 0 1500 700"
+    preserveAspectRatio="xMidYMid slice"
 >
 
 
-<!-- ==================================================
-     CLIPPING AREAS
-================================================== -->
+<!-- =====================================================
+     F
+===================================================== -->
 
 <defs>
 
-
     <clipPath id="clipF">
-
         <polygon
-            points="
-                80,70
-                350,70
-                290,430
-                20,430
-            "
+            points="0,70 300,70 250,630 0,630"
         />
-
     </clipPath>
-
 
     <clipPath id="clipO">
-
         <polygon
-            points="
-                350,70
-                650,70
-                590,430
-                290,430
-            "
+            points="300,70 600,70 550,630 250,630"
         />
-
     </clipPath>
-
 
     <clipPath id="clipR">
-
         <polygon
-            points="
-                650,70
-                900,70
-                850,430
-                590,430
-            "
+            points="600,70 900,70 850,630 550,630"
         />
-
     </clipPath>
-
 
     <clipPath id="clipA">
-
         <polygon
-            points="
-                900,70
-                1180,70
-                1130,430
-                850,430
-            "
+            points="900,70 1200,70 1150,630 850,630"
         />
-
     </clipPath>
-
 
     <clipPath id="clipM">
-
         <polygon
-            points="
-                1180,70
-                1470,70
-                1400,430
-                1130,430
-            "
+            points="1200,70 1500,70 1450,630 1150,630"
         />
-
     </clipPath>
-
 
 </defs>
 
 
-
-<!-- ==================================================
-     F
-================================================== -->
+<!-- F -->
 
 <g
     class="panel-group"
     onclick="openLetter('F')"
 >
 
-
     <image
-        href="1000144207.jpg"
+        class="photo-panel"
+        href="F.jpg"
         x="0"
         y="0"
-        width="500"
-        height="500"
+        width="350"
+        height="700"
         preserveAspectRatio="xMidYMid slice"
         clip-path="url(#clipF)"
-        class="panel-photo"
     />
 
-
     <polygon
-        points="
-            80,70
-            350,70
-            290,430
-            20,430
-        "
         class="photo-overlay"
+        points="0,70 300,70 250,630 0,630"
     />
 
-
-    <polygon
-        points="
-            80,70
-            350,70
-            290,430
-            20,430
-        "
-        class="foram-panel"
+    <path
+        class="panel-outline"
+        d="M 0 70 L 300 70 L 250 630 L 0 630 Z"
     />
-
 
     <text
-        class="foram-letter letter-1"
-        x="185"
-        y="260"
+        class="foram-letter"
+        x="150"
+        y="360"
     >
         F
     </text>
 
-
     <text
-        class="foram-word word-1"
-        x="185"
-        y="330"
+        class="foram-word"
+        x="150"
+        y="450"
     >
         Funny
     </text>
-
 
 </g>
 
 
 
-<!-- ==================================================
-     O
-================================================== -->
+<!-- O -->
 
 <g
     class="panel-group"
     onclick="openLetter('O')"
 >
 
-
     <image
-        href="1000144204.jpg"
+        class="photo-panel"
+        href="O.jpg"
         x="250"
         y="0"
-        width="500"
-        height="500"
+        width="350"
+        height="700"
         preserveAspectRatio="xMidYMid slice"
         clip-path="url(#clipO)"
-        class="panel-photo"
     />
 
-
     <polygon
-        points="
-            350,70
-            650,70
-            590,430
-            290,430
-        "
         class="photo-overlay"
+        points="300,70 600,70 550,630 250,630"
     />
 
-
-    <polygon
-        points="
-            350,70
-            650,70
-            590,430
-            290,430
-        "
-        class="foram-panel"
+    <path
+        class="panel-outline"
+        d="M 300 70 L 600 70 L 550 630 L 250 630 Z"
     />
-
 
     <text
-        class="foram-letter letter-2"
-        x="470"
-        y="260"
+        class="foram-letter"
+        x="450"
+        y="360"
     >
         O
     </text>
 
-
     <text
-        class="foram-word word-2"
-        x="470"
-        y="330"
+        class="foram-word"
+        x="450"
+        y="450"
     >
         Overthinker
     </text>
-
 
 </g>
 
 
 
-<!-- ==================================================
-     R
-================================================== -->
+<!-- R -->
 
 <g
     class="panel-group"
     onclick="openLetter('R')"
 >
 
-
     <image
-        href="1000144198.jpg"
-        x="500"
+        class="photo-panel"
+        href="R.jpg"
+        x="550"
         y="0"
-        width="500"
-        height="500"
+        width="350"
+        height="700"
         preserveAspectRatio="xMidYMid slice"
         clip-path="url(#clipR)"
-        class="panel-photo"
     />
 
-
     <polygon
-        points="
-            650,70
-            900,70
-            850,430
-            590,430
-        "
         class="photo-overlay"
+        points="600,70 900,70 850,630 550,630"
     />
 
-
-    <polygon
-        points="
-            650,70
-            900,70
-            850,430
-            590,430
-        "
-        class="foram-panel"
+    <path
+        class="panel-outline"
+        d="M 600 70 L 900 70 L 850 630 L 550 630 Z"
     />
-
 
     <text
-        class="foram-letter letter-3"
-        x="720"
-        y="260"
+        class="foram-letter"
+        x="750"
+        y="360"
     >
         R
     </text>
 
-
     <text
-        class="foram-word word-3"
-        x="720"
-        y="330"
+        class="foram-word"
+        x="750"
+        y="450"
     >
         Reckless
     </text>
-
 
 </g>
 
 
 
-<!-- ==================================================
-     A
-================================================== -->
+<!-- A -->
 
 <g
     class="panel-group"
     onclick="openLetter('A')"
 >
 
-
     <image
-        href="1000144201.jpg"
-        x="750"
+        class="photo-panel"
+        href="A.jpg"
+        x="850"
         y="0"
-        width="500"
-        height="500"
+        width="350"
+        height="700"
         preserveAspectRatio="xMidYMid slice"
         clip-path="url(#clipA)"
-        class="panel-photo"
     />
 
-
     <polygon
-        points="
-            900,70
-            1180,70
-            1130,430
-            850,430
-        "
         class="photo-overlay"
+        points="900,70 1200,70 1150,630 850,630"
     />
 
-
-    <polygon
-        points="
-            900,70
-            1180,70
-            1130,430
-            850,430
-        "
-        class="foram-panel"
+    <path
+        class="panel-outline"
+        d="M 900 70 L 1200 70 L 1150 630 L 850 630 Z"
     />
-
 
     <text
-        class="foram-letter letter-4"
-        x="1015"
-        y="260"
+        class="foram-letter"
+        x="1050"
+        y="360"
     >
         A
     </text>
 
-
     <text
-        class="foram-word word-4"
-        x="1015"
-        y="330"
+        class="foram-word"
+        x="1050"
+        y="450"
     >
         Attitude
     </text>
-
 
 </g>
 
 
 
-<!-- ==================================================
-     M
-================================================== -->
+<!-- M -->
 
 <g
     class="panel-group"
     onclick="openLetter('M')"
 >
 
-
     <image
-        href="1000144210.jpg"
-        x="1000"
+        class="photo-panel"
+        href="M.jpg"
+        x="1150"
         y="0"
-        width="500"
-        height="500"
+        width="350"
+        height="700"
         preserveAspectRatio="xMidYMid slice"
         clip-path="url(#clipM)"
-        class="panel-photo"
     />
 
-
     <polygon
-        points="
-            1180,70
-            1470,70
-            1400,430
-            1130,430
-        "
         class="photo-overlay"
+        points="1200,70 1500,70 1450,630 1150,630"
     />
 
-
-    <polygon
-        points="
-            1180,70
-            1470,70
-            1400,430
-            1130,430
-        "
-        class="foram-panel"
+    <path
+        class="panel-outline"
+        d="M 1200 70 L 1500 70 L 1450 630 L 1150 630 Z"
     />
-
 
     <text
-        class="foram-letter letter-5"
-        x="1290"
-        y="260"
+        class="foram-letter"
+        x="1350"
+        y="360"
     >
         M
     </text>
 
-
     <text
-        class="foram-word word-5"
-        x="1290"
-        y="330"
+        class="foram-word"
+        x="1350"
+        y="450"
     >
         Menace
     </text>
-
 
 </g>
 
@@ -1304,18 +971,16 @@ body {
 
 
 
-<!-- ==================================================
-     3. INDIVIDUAL LETTER SCREEN
-================================================== -->
+<!-- =====================================================
+     INDIVIDUAL LETTER SCREEN
+===================================================== -->
 
 <section
     class="letter-screen"
     id="letterScreen"
 >
 
-
     <div class="letter-screen-content">
-
 
         <div
             class="letter-screen-letter"
@@ -1351,9 +1016,7 @@ body {
             Next: O
         </button>
 
-
     </div>
-
 
 </section>
 
@@ -1361,285 +1024,161 @@ body {
 
 <script>
 
-/* ==================================================
-   ENVELOPE
-================================================== */
 
-function openEnvelope() {
+/* =====================================================
+   SHOW FORAM PAGE
+===================================================== */
 
-    const wrapper =
-        document.getElementById(
-            "envelopeWrapper"
-        );
+function showForam() {
 
-    wrapper.classList.add("open");
+    const opening =
+        document.getElementById("openingScreen");
 
-}
+    const foram =
+        document.getElementById("foramScreen");
 
-
-
-/* ==================================================
-   SHOW FORAM
-================================================== */
-
-function showForam(event) {
-
-    event.stopPropagation();
-
-
-    const stage =
-        document.querySelector(
-            ".stage"
-        );
-
-
-    const foramScreen =
-        document.getElementById(
-            "foramScreen"
-        );
-
-
-    stage.style.transition =
-        "opacity 0.7s ease";
-
-
-    stage.style.opacity = "0";
-
+    opening.style.opacity = "0";
 
     setTimeout(function() {
 
-        stage.style.display = "none";
+        opening.style.visibility = "hidden";
 
-        foramScreen.classList.add(
-            "visible"
-        );
+        foram.classList.add("visible");
 
     }, 700);
 
 }
 
 
-
-/* ==================================================
-   ROAST DATA
-================================================== */
+/* =====================================================
+   LETTER DATA
+===================================================== */
 
 const letterData = {
 
-
     F: {
-
         word: "Funny",
-
         roast:
             "Thinks she's hilarious. Unfortunately, she's right.",
-
-        next:
-            "Next: O"
-
+        next: "Next: O"
     },
-
 
     O: {
-
         word: "Overthinker",
-
         roast:
             "Can find seventeen possible meanings in a two-word message.",
-
-        next:
-            "Next: R"
-
+        next: "Next: R"
     },
-
 
     R: {
-
         word: "Reckless",
-
         roast:
             "Common sense is merely a suggestion.",
-
-        next:
-            "Next: A"
-
+        next: "Next: A"
     },
-
 
     A: {
-
         word: "Attitude",
-
         roast:
             "Comes free with every opinion. No returns accepted.",
-
-        next:
-            "Next: M"
-
+        next: "Next: M"
     },
 
-
     M: {
-
         word: "Menace",
-
         roast:
             "Looks harmless. That is the first mistake.",
-
-        next:
-            "Finish"
-
+        next: "Finish"
     }
 
 };
 
 
-
-/* ==================================================
-   CURRENT LETTER
-================================================== */
-
 let currentLetter = null;
 
 
-
-/* ==================================================
-   OPEN LETTER
-================================================== */
+/* =====================================================
+   OPEN INDIVIDUAL LETTER
+===================================================== */
 
 function openLetter(letter) {
 
-
     currentLetter = letter;
 
-
     const screen =
-        document.getElementById(
-            "letterScreen"
-        );
-
+        document.getElementById("letterScreen");
 
     const letterElement =
-        document.getElementById(
-            "letterScreenLetter"
-        );
-
+        document.getElementById("letterScreenLetter");
 
     const wordElement =
-        document.getElementById(
-            "letterScreenWord"
-        );
-
+        document.getElementById("letterScreenWord");
 
     const roastElement =
-        document.getElementById(
-            "roastText"
-        );
-
+        document.getElementById("roastText");
 
     const button =
-        document.getElementById(
-            "nextLetterButton"
-        );
+        document.getElementById("nextLetterButton");
 
 
-    const data =
-        letterData[letter];
+    const data = letterData[letter];
 
-
-    if (!data) {
-
-        return;
-
-    }
+    if (!data) return;
 
 
     letterElement.textContent =
         letter;
 
-
     wordElement.textContent =
         data.word;
 
-
     roastElement.textContent =
         data.roast;
-
 
     button.textContent =
         data.next;
 
 
-    screen.classList.add(
-        "visible"
+    screen.classList.add("visible");
+
+}
+
+
+/* =====================================================
+   NEXT LETTER
+===================================================== */
+
+function nextLetter() {
+
+    const order =
+        ["F", "O", "R", "A", "M"];
+
+
+    const currentIndex =
+        order.indexOf(currentLetter);
+
+
+    if (currentIndex === -1) {
+        return;
+    }
+
+
+    if (currentIndex === order.length - 1) {
+
+        /* M is finished */
+
+        return;
+    }
+
+
+    openLetter(
+        order[currentIndex + 1]
     );
 
 }
 
 
-
-/* ==================================================
-   NEXT LETTER
-================================================== */
-
-function nextLetter() {
-
-
-    const order =
-        [
-            "F",
-            "O",
-            "R",
-            "A",
-            "M"
-        ];
-
-
-    const currentIndex =
-        order.indexOf(
-            currentLetter
-        );
-
-
-    if (currentIndex === -1) {
-
-        return;
-
-    }
-
-
-    /*
-
-       M is currently the final screen.
-
-       We will decide what happens
-       after M later.
-
-    */
-
-    if (
-        currentIndex ===
-        order.length - 1
-    ) {
-
-        return;
-
-    }
-
-
-    const next =
-        order[
-            currentIndex + 1
-        ];
-
-
-    openLetter(next);
-
-}
-
 </script>
 
-
 </body>
-
 </html>
