@@ -1161,6 +1161,14 @@ body {
 
 <body>
 
+   <audio
+    id="backgroundMusic"
+    src="audio.mp3"
+    autoplay
+    loop
+    preload="auto">
+</audio>
+
 
 <!-- =========================================================
      BACKGROUND
@@ -2151,7 +2159,34 @@ function nextLetter() {
     );
 
 }
+const music = document.getElementById("backgroundMusic");
 
+music.volume = 0.5;
+
+window.addEventListener("load", () => {
+    music.play().catch(() => {
+        /*
+         Browser blocked autoplay.
+         The music will start on the first
+         interaction with the page.
+        */
+    });
+});
+
+
+/*
+   Fallback:
+   If autoplay was blocked, start the music
+   on the first interaction anywhere on the page.
+*/
+
+document.addEventListener("click", () => {
+
+    if (music.paused) {
+        music.play().catch(() => {});
+    }
+
+}, { once: true });
 
 </script>
 
