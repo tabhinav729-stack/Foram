@@ -1,20 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Notes — Abhinav</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foram's Annual Report Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F3EFE3;
+    --paper-dark: #E9E2CE;
+    --ink: #1F2A3C;
+    --ink-soft: #4A5568;
+    --red: #B3261E;
+    --gold: #A9762F;
+    --line: #C9BFA3;
+  }
 
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
 
-  <main class="container">
-    <p>Nothing here yet.</p>
-    <p style="margin-top: 12px;">
-      <a href="index.html">← back</a>
-    </p>
-  </main>
+  body{
+    margin:0;
+    min-height:100vh;
+    background: var(--paper-dark);
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(0,0,0,0.02), transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(0,0,0,0.02), transparent 40%);
+    color: var(--ink);
+    font-family: 'Courier Prime', monospace;
+    padding: 0;
+    overflow-x:hidden;
+  }
+  body.locked{ overflow:hidden; height:100vh; }
 
-</body>
-</html>
+  /* ---------- COVER / SEAL ---------- */
+  #cover{
+    position:fixed; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    flex-direction:column;
+    background: var(--paper-dark);
+    z-index: 50;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  #cover.gone{ opacity:0; visibility:hidden; pointer-events:none; }
+
+  .cover-eyebrow{
+    font-family:'Rajdhani', sans-serif;
+    font-weight:600;
+    letter-spacing:0.4em;
+    font-size:11px;
+    color: var(--ink-soft);
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+  .cover-title{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size: clamp(34px, 9vw, 52px);
+    margin: 0 0 34px;
+  }
+
+  .seal{
+    width: 128px; height:128px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    background: radial-gradient(circle at 35% 30%, #c9342a, var(--red) 60%, #8f1f18 100%);
+    color:#F3EFE3;
+    font-family:'Rajdhani', sans-serif;
+    font-weight:700;
+    letter-spacing:0.12em;
+    font-size:13px;
+    line-height:1.3;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.12), 0 10px 24px rgba(0,0,0,0.18);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.4s ease;
+    position:relative;
+  }
+  .seal:hover{ transform: translateY(-2px) scale(1.03); }
+  .seal:active{ transform: translateY(1px) scale(0.98); }
+  .seal::after{
+    content:"";
+    position:absolute; inset:8px;
+    border:1.5px dashed rgba(243,239,227,0.55);
+    border-radius:50%;
+  }
+  .seal.cracked{
+    animation: crack 0.55s ease forwards;
+  }
+  @keyframes crack{
+    0%{ transform:scale(1) rotate(0); opacity:1; }
+    35%{ transform:scale(1.15) rotate(-4deg); }
+    100%{ transform:scale(0.3) rotate(12deg); opacity:0; }
+  }
+
+  .cover-hint{
+    margin-top: 18px;
+    font-family:'Caveat', cursive;
+    color: var(--ink-soft);
+    font-size: 18px;
+    transform: rotate(-1deg);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .seal.cracked{ animation:none; opacity:0; transition: opacity 0.3s ease; }
+  }
+
+  /* ---------- SHEET WRAPPER ---------- */
+  #sheet-wrapper{
+    opacity:0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    padding: 32px 14px 80px;
+  }
+  #sheet-wrapper.shown{ opacity:1; transform:translateY(0); }
+
+  .sheet{
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    box-shadow: 0 1px 0 var(--ink), 6px 6px 0 rgba(31,42,60,0.08);
+    position: relative;
+  }
+  .sheet::before{
+    content:"";
+    position:absolute; inset:8px;
+    border: 1px solid var(--line);
+    pointer-events:none;
+  }
+
+  .poetic-intro{
+    padding: 40px 32px 34px;
+    text-align:center;
+    border-bottom: 2px solid var(--ink);
+    background: linear-gradient(180deg, rgba(169,118,47,0.05), transparent 60%);
+  }
+  .poetic-intro .flourish{
+    font-family:'Rajdhani', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  .poetic-intro p{
+    font-family:'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(17px, 2.4vw, 20px);
+    line-height: 1.6;
+    color: var(--ink);
+    max-width: 580px;
+    margin: 0 auto 15px;
+    text-align: left;
+  }
+  .poetic-intro p:last-child{ margin-bottom:0; }
+  .poetic-intro .wink{
+    font-family:'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--red);
+  }
+
+  header.masthead{
+    text-align:center;
+    padding: 34px 20px 20px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .eyebrow{
+    font-family:'Rajdhani', sans-serif;
+    font-weight:600;
+    letter-spacing: 0.35em;
+    font-size: 11px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+  h1.title{
+    font-family:'Rajdhani', sans-serif;
+    font-weight:700;
+    font-size: clamp(28px, 6vw, 42px);
+    letter-spacing: 0.02em;
+    margin: 10px 0 6px;
+    text-transform: uppercase;
+  }
+  .subtitle{
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .meta-table{ width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 22px; }
+  .meta-table td{ padding: 6px 20px; border-top: 1px dashed var(--line); }
+  .meta-table td.label{
+    color: var(--ink-soft); width: 40%;
+    font-family:'Rajdhani', sans-serif; font-weight:600; letter-spacing:0.04em;
+  }
+  .meta-table td.val{ font-weight:700; }
+
+  .intro{
+    padding: 26px 26px 24px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  section.subjects{ padding: 6px 0 0; }
+
+  .row{
+    display:grid;
+    grid-template-columns: 46px 1fr 64px;
+    gap: 14px;
+    align-items: start;
+    padding: 22px 26px;
+    border-bottom: 1px dashed var(--line);
+    position: relative;
+    opacity:0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .row.in-view{ opacity:1; transform:translateY(0); }
+  .row:last-child{ border-bottom: 2px solid var(--ink); }
+
+  .rowno{
+    font-family:'Rajdhani', sans-serif; font-weight:700; font-size: 22px;
+    color: var(--ink-soft); opacity:0.5; line-height:1;
+  }
+
+  .subject-name{
+    font-family:'Rajdhani', sans-serif; font-weight:700; font-size: 16px;
+    text-transform: uppercase; letter-spacing: 0.03em; margin: 0 0 8px;
+  }
+
+  .remark{ font-size: 13.5px; line-height:1.65; color: var(--ink); }
+  .remark b{ color: var(--ink); }
+
+  .marks{
+    font-family:'Rajdhani', sans-serif; font-weight:700; font-size: 19px;
+    text-align:right; white-space: nowrap; padding-top: 2px;
+  }
+  .marks .max{ font-size:11px; font-weight:600; color: var(--ink-soft); }
+
+  .pen{
+    font-family:'Caveat', cursive; color: var(--red); font-weight:700;
+    font-size: 19px; display:inline-block; transform: rotate(-2.5deg); margin-left: 4px;
+  }
+
+  .tick{
+    position:absolute; right: 66px; top: 20px;
+    font-family:'Caveat', cursive; color: var(--red); font-size: 26px;
+    transform: rotate(-8deg) scale(0); opacity:0;
+    transition: transform 0.4s cubic-bezier(.3,1.6,.4,1) 0.3s, opacity 0.3s ease 0.3s;
+  }
+  .row.in-view .tick{ transform: rotate(-8deg) scale(1); opacity:0.85; }
+
+  .result{ padding: 34px 26px 8px; text-align:center; position:relative; }
+  .result .grade-line{
+    font-family:'Rajdhani', sans-serif; font-size: 14px; letter-spacing:0.08em;
+    color: var(--ink-soft); text-transform:uppercase; margin-bottom: 6px;
+  }
+  .result .grade{
+    font-family:'Rajdhani', sans-serif; font-weight:700;
+    font-size: clamp(22px, 5vw, 30px); text-transform: uppercase; letter-spacing: 0.03em;
+  }
+
+  .stamp{
+    width: 168px; height:168px;
+    margin: 26px auto 4px;
+    border-radius:50%;
+    border: 3px solid var(--red);
+    box-shadow: 0 0 0 3px var(--paper), 0 0 0 4px var(--red);
+    display:flex; align-items:center; justify-content:center;
+    color: var(--red);
+    font-family:'Rajdhani', sans-serif; font-weight:700; text-align:center;
+    line-height:1.15; letter-spacing:0.05em; text-transform:uppercase; font-size: 15px;
+    transform: rotate(-9deg) scale(0);
+    opacity:0;
+    animation: stampIn 0.5s cubic-bezier(.2,1.4,.4,1) 0.35s forwards;
+    background: radial-gradient(circle at 50% 40%, rgba(179,38,30,0.06), transparent 70%);
+    cursor:pointer;
+    user-select:none;
+  }
+  .stamp:active{ transform: rotate(-9deg) scale(0.94); }
+  @media (prefers-reduced-motion: reduce){
+    .stamp{ animation: none; opacity:1; transform: rotate(-9deg) scale(1); }
+  }
+  @keyframes stampIn{
+    0%{ transform: rotate(-9deg) scale(0); opacity:0; }
+    60%{ transform: rotate(-9deg) scale(1.08); opacity:1; }
+    100%{ transform: rotate(-9deg) scale(1); opacity:1; }
+  }
+
+  .stamp-hint{
+    font-family:'Caveat', cursive;
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin-bottom: 18px;
+    opacity: 0.8;
+    transition: opacity 0.4s ease;
+  }
+  .stamp-hint.faded{ opacity:0; }
+
+  .final-note{
+    max-width: 480px; margin: 6px auto 0;
+    font-family:'Caveat', cursive; color: var(--red); font-size: 22px;
+    line-height:1.4; transform: rotate(-1deg);
+  }
+
+  footer.sign{
+    display:flex; justify-content: space-between;
+    padding: 22px 26px 30px; font-size: 12px; color: var(--ink-soft);
+  }
+  footer.sign .sig{
+    font-family:'Caveat', cursive; font-size: 22px; color: var(--ink); display:block;
+  }
