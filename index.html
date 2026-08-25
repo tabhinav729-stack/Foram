@@ -819,32 +819,27 @@ body {
 }
 
 .letter-screen-content {
-    width: min(760px,88vw);
+    width: min(760px, 88vw);
+    height: 100vh;
 
-    min-height: 100%;
-
-    padding: 90px 0 70px;
-
-    text-align: center;
+    padding: 70px 0 60px;
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
 
-    justify-content: center;
+    text-align: center;
 }
 
 .letter-screen-letter {
+    flex-shrink: 0;
+
     font-family:
         Georgia,
         "Times New Roman",
         serif;
 
-    font-size:
-        clamp(80px,12vw,150px);
-
+    font-size: clamp(80px, 12vw, 150px);
     font-weight: 400;
 
     color: #263247;
@@ -855,6 +850,8 @@ body {
 }
 
 .letter-screen-word {
+    flex-shrink: 0;
+
     font-family:
         "Courier Prime",
         monospace;
@@ -867,36 +864,106 @@ body {
 
     color: #a9762f;
 
-    margin-bottom: 45px;
+    margin-bottom: 30px;
 }
 
-.letter-screen-roast {
-    width: min(650px,85vw);
 
-    max-width: 650px;
+/* =========================================================
+   POEM SCROLLER
+========================================================= */
+
+.letter-screen-roast {
+    width: min(620px, 82vw);
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    padding: 10px 35px 30px 10px;
+
+    text-align: left;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
-    font-size:
-        clamp(17px,2vw,21px);
+    font-size: clamp(17px, 2vw, 21px);
 
     font-style: italic;
 
-    line-height: 1.5;
+    line-height: 1.55;
 
     color: #4d5360;
 
-    margin-bottom: 55px;
+    white-space: pre-line;
 
     /*
-       THIS preserves all the poem's line breaks.
+       Keeps the scrollbar subtle
     */
-    white-space: pre-line;
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        #a9762f
+        transparent;
 }
 
 
+/* Chrome / Edge / Safari */
+
+.letter-screen-roast::-webkit-scrollbar {
+    width: 5px;
+}
+
+.letter-screen-roast::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.letter-screen-roast::-webkit-scrollbar-thumb {
+    background: #a9762f;
+    border-radius: 10px;
+}
+
+.letter-screen-roast::-webkit-scrollbar-thumb:hover {
+    background: #263247;
+}
+
+
+/* =========================================================
+   NEXT BUTTON
+========================================================= */
+
+.next-letter-button {
+    flex-shrink: 0;
+
+    margin-top: 25px;
+
+    padding: 12px 28px;
+
+    border: 1px solid #263247;
+
+    background: transparent;
+
+    color: #263247;
+
+    font-family:
+        "Courier Prime",
+        monospace;
+
+    font-size: 11px;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.25s ease;
+}
 /* =========================================================
    BACK BUTTON
 ========================================================= */
