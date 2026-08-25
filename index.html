@@ -139,6 +139,25 @@
         fill 0.3s ease;
 }
 
+   .foram-word {
+    font-family: "Courier Prime", monospace;
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    fill: #050505;
+    text-anchor: middle;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.45s ease,
+        transform 0.3s ease;
+}
+
+.foram-screen.visible .word-1 {
+    opacity: 1;
+    transition-delay: 0.35s;
+}
+
 
 /* =========================================
    LETTER APPEARANCE
@@ -856,7 +875,11 @@
 
 <section class="foram-screen" id="foramScreen">
 
-    <svg class="foram-svg" viewBox="0 0 1500 500" preserveAspectRatio="xMidYMid meet" aria-label="FORAM" > <!-- ================================= PANEL 1 — F ================================== --> <g class="panel-group"> <polygon class="foram-panel" points="80,70 350,70 290,430 20,430" /> <path class="panel-line panel-outline" d="M 80 70 L 350 70 L 290 430 L 20 430 Z" /> <text class="foram-letter letter-1" x="185" y="315" >F</text> </g> <!-- ================================= PANEL 2 — O ================================== --> <g class="panel-group"> <polygon class="foram-panel" points="350,70 650,70 590,430 290,430" /> <path class="panel-line panel-outline" d="M 350 70 L 650 70 L 590 430 L 290 430" /> <text class="foram-letter letter-2" x="470" y="315" >O</text> </g> <!-- ================================= PANEL 3 — R ================================== --> <g class="panel-group"> <polygon class="foram-panel" points="650,70 900,70 850,430 590,430" /> <path class="panel-line panel-outline" d="M 650 70 L 900 70 L 850 430 L 590 430" /> <text class="foram-letter letter-3" x="720" y="315" >R</text> </g> <!-- ================================= PANEL 4 — A ================================== --> <g class="panel-group"> <polygon class="foram-panel" points="900,70 1180,70 1130,430 850,430" /> <path class="panel-line panel-outline" d="M 900 70 L 1180 70 L 1130 430 L 850 430" /> <text class="foram-letter letter-4" x="1015" y="315" >A</text> </g> <!-- ================================= PANEL 5 — M ================================== --> <g class="panel-group"> <polygon class="foram-panel" points="1180,70 1470,70 1400,430 1130,430" /> <path class="panel-line panel-outline" d="M 1180 70 L 1470 70 L 1400 430 L 1130 430" /> <text class="foram-letter letter-5" x="1290" y="315" >M</text> </g> </svg> </section>
+    <svg class="foram-svg" viewBox="0 0 1500 500" preserveAspectRatio="xMidYMid meet" aria-label="FORAM" > <!-- ================================= PANEL 1 — F ================================== --> <g class="panel-group"> <polygon class="foram-panel" points="80,70 350,70 290,430 20,430" /> <path class="panel-line panel-outline" d="M 80 70 L 350 70 L 290 430 L 20 430 Z" /> <text class="foram-letter letter-1" x="185" y="315" >F</text> <text
+    class="foram-word word-1"
+    x="185"
+    y="330"
+>Funny</text> </g> <!-- ================================= PANEL 2 — O ================================== --> <g class="panel-group"> <polygon class="foram-panel" points="350,70 650,70 590,430 290,430" /> <path class="panel-line panel-outline" d="M 350 70 L 650 70 L 590 430 L 290 430" /> <text class="foram-letter letter-2" x="470" y="315" >O</text> </g> <!-- ================================= PANEL 3 — R ================================== --> <g class="panel-group"> <polygon class="foram-panel" points="650,70 900,70 850,430 590,430" /> <path class="panel-line panel-outline" d="M 650 70 L 900 70 L 850 430 L 590 430" /> <text class="foram-letter letter-3" x="720" y="315" >R</text> </g> <!-- ================================= PANEL 4 — A ================================== --> <g class="panel-group"> <polygon class="foram-panel" points="900,70 1180,70 1130,430 850,430" /> <path class="panel-line panel-outline" d="M 900 70 L 1180 70 L 1130 430 L 850 430" /> <text class="foram-letter letter-4" x="1015" y="315" >A</text> </g> <!-- ================================= PANEL 5 — M ================================== --> <g class="panel-group"> <polygon class="foram-panel" points="1180,70 1470,70 1400,430 1130,430" /> <path class="panel-line panel-outline" d="M 1180 70 L 1470 70 L 1400 430 L 1130 430" /> <text class="foram-letter letter-5" x="1290" y="315" >M</text> </g> </svg> </section>
     
 <script>
 
