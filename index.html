@@ -8,6 +8,166 @@
 
 <style>
 
+    /* =========================================
+   FORAM REVEAL SCREEN
+========================================= */
+
+.foram-screen {
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 100;
+
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: scale(1.03);
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease,
+        transform 1s ease;
+}
+
+
+/* Screen becomes visible */
+
+.foram-screen.visible {
+
+    opacity: 1;
+    visibility: visible;
+
+    transform: scale(1);
+}
+
+
+/* =========================================
+   SVG
+========================================= */
+
+.foram-svg {
+
+    width: min(88vw, 900px);
+    height: auto;
+
+    overflow: visible;
+}
+
+
+/* =========================================
+   HAND-DRAWN LINES
+========================================= */
+
+.panel-line {
+
+    fill: none;
+
+    stroke: #080808;
+
+    stroke-width: 4;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    /*
+       Makes the lines feel slightly
+       hand-drawn rather than perfectly digital.
+    */
+
+    vector-effect: non-scaling-stroke;
+}
+
+
+/* =========================================
+   LETTERS
+========================================= */
+
+.foram-letter {
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 68px;
+
+    font-weight: 400;
+
+    fill: #050505;
+
+    text-anchor: middle;
+
+    opacity: 0;
+
+    transform-box: fill-box;
+    transform-origin: center;
+
+    transform: translateY(12px);
+
+    transition:
+        opacity 0.45s ease,
+        transform 0.45s ease;
+}
+
+
+/* =========================================
+   LETTER ANIMATION
+========================================= */
+
+.foram-screen.visible .foram-letter {
+
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* Each letter appears separately */
+
+.foram-screen.visible .foram-letter:nth-of-type(6) {
+    transition-delay: 0.25s;
+}
+
+.foram-screen.visible .foram-letter:nth-of-type(7) {
+    transition-delay: 0.4s;
+}
+
+.foram-screen.visible .foram-letter:nth-of-type(8) {
+    transition-delay: 0.55s;
+}
+
+.foram-screen.visible .foram-letter:nth-of-type(9) {
+    transition-delay: 0.7s;
+}
+
+.foram-screen.visible .foram-letter:nth-of-type(10) {
+    transition-delay: 0.85s;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .foram-svg {
+        width: 94vw;
+    }
+
+    .foram-letter {
+        font-size: 72px;
+    }
+
+}
+    
     .roast-button {
     display: inline-block;
 
@@ -596,11 +756,11 @@
                     <div class="letter-text">
                         Some things deserve a proper introduction.
                     </div>
-
-                    <a href="report-card.html" class="roast-button">
+                    
+<button class="roast-button" onclick="showForam()">
     I am ready to be roasted
-</a>
-
+</button>
+    
                 </div>
 
             </div>
@@ -637,8 +797,110 @@
 
 </main>
 
+    <!-- =========================================
+     FORAM REVEAL SCREEN
+========================================= -->
+
+<section class="foram-screen" id="foramScreen">
+
+    <svg
+        class="foram-svg"
+        viewBox="0 0 1000 360"
+        preserveAspectRatio="xMidYMid meet"
+        aria-label="FORAM"
+    >
+
+        <!-- Outer shape -->
+
+        <path
+            class="panel-line"
+            d="M 95 70
+               L 850 68
+               L 750 300
+               L 35 286
+               Z"
+        />
+
+        <!-- Panel divisions -->
+
+        <path
+            class="panel-line"
+            d="M 220 70 L 135 289"
+        />
+
+        <path
+            class="panel-line"
+            d="M 410 69 L 335 293"
+        />
+
+        <path
+            class="panel-line"
+            d="M 570 69 L 515 296"
+        />
+
+        <path
+            class="panel-line"
+            d="M 735 68 L 685 298"
+        />
+
+
+        <!-- Letters -->
+
+        <text
+            class="foram-letter"
+            x="145"
+            y="235"
+        >F</text>
+
+        <text
+            class="foram-letter"
+            x="300"
+            y="235"
+        >O</text>
+
+        <text
+            class="foram-letter"
+            x="445"
+            y="235"
+        >R</text>
+
+        <text
+            class="foram-letter"
+            x="585"
+            y="235"
+        >A</text>
+
+        <text
+            class="foram-letter"
+            x="720"
+            y="235"
+        >M</text>
+
+    </svg>
+
+</section>
 
 <script>
+
+    function showForam() {
+
+    const envelope = document.getElementById("envelope");
+    const foramScreen = document.getElementById("foramScreen");
+
+    // Fade out the envelope screen
+    envelope.style.transition = "opacity 0.7s ease";
+    envelope.style.opacity = "0";
+
+    // Hide the envelope completely
+    setTimeout(() => {
+
+        envelope.style.display = "none";
+
+        // Show FORAM screen
+        foramScreen.classList.add("visible");
+
+    }, 700);
+}
 
     let opened = false;
 
